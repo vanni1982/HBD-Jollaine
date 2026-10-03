@@ -1,0 +1,110 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maligayang Kaarawan, Jollaine!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>Para sa Iyo! 🎁</h1>
+        <div class="instruction">Pindutin ang mga baraha pababa:</div>
+    </div>
+
+    <!-- PANGUNAHING LAYOUT BOX -->
+    <div class="main-layout">
+        
+        <!-- KALIWA: Lalagyan ng Tatlong Baraha -->
+        <div class="cards-container">
+            <div class="pointer-demo-wrapper">
+                <div class="windows-98-pointer"></div>
+            </div>
+
+            <!-- CARD 1: HAPPY -->
+            <div class="card-wrapper" onclick="clickFirstCard(this)">
+                <div class="card-inner">
+                    <div class="card-back"></div>
+                    <div class="card-front">
+                        <div class="corner-suit">A<br>♥</div>
+                        <div class="card-text">Happy</div>
+                        <div class="corner-suit bottom">A<br>♥</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2: BIRTHDAY -->
+            <div class="card-wrapper" onclick="toggleFlip(this)">
+                <div class="card-inner">
+                    <div class="card-back"></div>
+                    <div class="card-front">
+                        <div class="corner-suit">A<br>♦</div>
+                        <div class="card-text">Birthday</div>
+                        <div class="corner-suit bottom">A<br>♦</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 3: JOLLAINE -->
+            <div class="card-wrapper" onclick="clickLastCard(this)">
+                <div class="card-inner">
+                    <div class="card-back"></div>
+                    <div class="card-front spades-card">
+                        <div class="corner-suit">A<br>♠</div>
+                        <div class="card-text">Jollaine!</div>
+                        <div class="corner-suit bottom">A<br>♠</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KANAN: Ang Maliit na PiP Video Player sa tapat ng Card 2 -->
+        <div class="video-pip-container">
+            <!-- Gagamit ng video controls para pwedeng i-pause o lakasan ni Jollaine -->
+            <video id="hbdVideo" src="hbd_song.mp4" preload="auto" controls loop></video>
+        </div>
+
+    </div>
+
+    <!-- ANG IYONG PIRMA NA LILITAW LATER -->
+    <div id="vanniSignature" class="footer-signature">
+        From: <span class="blinking-name">VANNI</span>
+    </div>
+
+    <script>
+        let isVideoPlaying = false;
+
+        function toggleFlip(cardElement) {
+            cardElement.classList.toggle('is-flipped');
+        }
+
+        // Pag-click sa Unang Card: Mag-flip at magsisimulang mag-play ang MP4 video
+        function clickFirstCard(cardElement) {
+            toggleFlip(cardElement);
+            
+            const video = document.getElementById('hbdVideo');
+            if (!isVideoPlaying) {
+                video.play().catch(error => {
+                    console.log("Kailangan ng interaction para mag-play ang video: ", error);
+                });
+                isVideoPlaying = true;
+            }
+        }
+
+        // Pag-click sa Huling Card: Mag-flip at lalabas ang name mo (From: VANNI)
+        function clickLastCard(cardElement) {
+            toggleFlip(cardElement);
+            
+            const signature = document.getElementById('vanniSignature');
+            if (cardElement.classList.contains('is-flipped')) {
+                signature.classList.add('show-signature');
+            } else {
+                signature.classList.remove('show-signature');
+            }
+        }
+    </script>
+
+</body>
+</html>
